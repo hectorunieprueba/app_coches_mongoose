@@ -42,9 +42,11 @@ app.use("/api/ventas", rutaVentas);
 //clase de middlewares
 app.use(logger);
 
-mongoose.connect(process.env.MONGODB_LOCAL)
+const port = process.env.PORT || 3000
+
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('BBDD en marcha!'))
 .catch((error) => {console.log('Cagadón mesopotámico'); console.error(error)})
 
 
-app.listen(3000, () => console.log("Proyecto arrancado en el puerto 3000"))
+app.listen(port, () => console.log("Proyecto arrancado en el puerto 3000"))
