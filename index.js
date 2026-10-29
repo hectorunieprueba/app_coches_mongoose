@@ -44,7 +44,7 @@ app.use(logger);
 
 const port = process.env.PORT || 3000
 
-mongoose.connect(process.env.MONGODB_URI_LOCAL)
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('BBDD en marcha!'))
 .catch((error) => {console.log('Cagadón mesopotámico'); console.error(error)})
 
