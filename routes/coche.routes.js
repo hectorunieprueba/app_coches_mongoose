@@ -18,12 +18,18 @@ ruta.get("/", cocheController.findAll)
 
 /**
  * @swagger
- * /api/coches/:id:
+ * /api/coches/buscar/{id}:
  *   get:
- *     summary: Obtener coches por id
+ *     summary: Obtener un coche por ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: ID del coche
  *     responses:
  *       200:
- *         description: Obtener un coche
+ *         description: Coche encontrado
+ *       404:
+ *         description: Coche no encontrado
  */
 ruta.get("/buscar/:id", cocheController.findById);
 
@@ -38,12 +44,30 @@ ruta.get("/buscar-por-marca/:marca", cocheController.findByMarca)
  * @swagger
  * /api/coches:
  *   post:
- *     summary: Insertar un coche en base de datos
+ *     summary: Crear un coche
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               marca:
+ *                 type: string
+ *               modelo:
+ *                 type: string
+ *               anio:
+ *                 type: number
  *     responses:
- *       200:
- *         description: Insertar un coche
+ *       201:
+ *         description: Coche creado
+ *       401:
+ *         description: No autenticado
+ *       403:
+ *         description: No autorizado
  */
-
 ruta.post("/",
     authMiddleware.soloAdmin, 
     authMiddleware.verificarToken,

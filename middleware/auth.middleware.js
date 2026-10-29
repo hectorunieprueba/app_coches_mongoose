@@ -217,7 +217,8 @@ const permitirRoles = (...rolesPermitidos) => {
 
     return (req, res, next) => {
 
-        if (!rolesPermitidos.includes(req.usuario.rol)) {
+        
+        if (!rolesPermitidos.includes(req.cualquiercosa.rol)) {
 
             return res.status(403).json({
                 mensaje: "No tienes permisos, pana"

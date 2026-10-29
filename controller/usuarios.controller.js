@@ -25,15 +25,16 @@ class UsuarioController {
 
             const passwordDesencriptado = user ? await bcrypt.compare(req.body.password, user.password) : false;
 
-
+            
+            
             //const result = await Usuario.findOne({username: req.body.username, password: passwordDesencriptado});
-
+            
             if (!passwordDesencriptado || !user) {
                 return res.status(404).send({ message: "usuario no encontrado" })
             }
-
-
-
+            
+            
+            
             //generamos un token
             const token = jwt.sign(
                 {
@@ -47,7 +48,8 @@ class UsuarioController {
                     expiresIn: "1h"
                 }
             )
-
+            
+            console.log("Login correcto, generando token...");
             return res.status(200).send({ "mensaje": "Credenciales correctas", "token": token });
         } catch (error) {
             return res.status(500).json({ "mensaje": "Fallo al enviar" });
@@ -90,7 +92,7 @@ class UsuarioController {
     async signUp(req, res) {
         try {
 
-            const passwordEncriptado = await bcrypt.hash(req.body.password, 15);
+            const passwordEncriptado = await bcrypt.hash(req.body.password, 8);
 
 
             const usuario = new Usuario({

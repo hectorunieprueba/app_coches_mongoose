@@ -1,29 +1,29 @@
 const swaggerJsdoc = require("swagger-jsdoc");
 
-const opciones = {
-
+const options = {
     definition: {
-
         openapi: "3.0.0",
 
         info: {
             title: "API Concesionario",
             version: "1.0.0",
-            description: "API REST para gestionar coches, usuarios y ventas"
+            description: "API del concesionario"
         },
 
-        servers: [
-            {
-                url: "http://localhost:3000"
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT"
+                }
             }
-        ]
+        }
     },
 
-    apis: [
-        "./routes/*.js"
-    ]
+    apis: ["./routes/*.js"]
 };
 
-const swaggerSpec = swaggerJsdoc(opciones);
+const swaggerSpec = swaggerJsdoc(options);
 
 module.exports = swaggerSpec;
